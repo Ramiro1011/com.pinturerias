@@ -33,7 +33,6 @@ public class ProductoDirector {
 
         //obtener el builder mediante la clave
         ProductoBuilderBase builder = builders.get(clave);
-
         //validar si existe
         if (builder == null) {
             throw new IllegalArgumentException("No existe builder para: " + clave);

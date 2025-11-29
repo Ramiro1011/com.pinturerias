@@ -5,6 +5,8 @@ import com.pinturerias.com.pinturerias.compartidos.dto.ProductoDTO;
 import com.pinturerias.com.pinturerias.compartidos.entity.Producto;
 import com.pinturerias.com.pinturerias.compartidos.entity.sucursal.ProductoOtroSucursal;
 import com.pinturerias.com.pinturerias.compartidos.entity.sucursal.ProductoPinturaSucursal;
+import com.pinturerias.com.pinturerias.general.service.ProductoGeneralService;
+import com.pinturerias.com.pinturerias.sucursal.dto.ProductoSucursalViewDTO;
 import com.pinturerias.com.pinturerias.sucursal.entity.*;
 import com.pinturerias.com.pinturerias.sucursal.repository.*;
 import org.springframework.stereotype.Service;
@@ -12,36 +14,92 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductoSucursalService {
 
     private final ProductoDirector director;
+
     private final ProductoPinturaSucursalRepository pinturaRepo;
     private final ProductoOtroSucursalRepository otroRepo;
+    private final ProductoPrecioStockService ppsService;
+    private final ProductoGeneralService generalService;
 
     private final CategoriaSucursalRepository categoriaRepo;
     private final FamiliaSucursalRepository familiaRepo;
     private final TamanoEnvaseSucursalRepository tamanoRepo;
-    private final BasePinturaSucursalRepository baseRepo;
 
     private final ColorSucursalRepository colorRepo;             // compartidos
     private final TipoPinturaSucursalRepository tipoPinturaRepo;
 
-    public ProductoSucursalService(ProductoDirector director, ProductoPinturaSucursalRepository pinturaRepo, ProductoOtroSucursalRepository otroRepo, CategoriaSucursalRepository categoriaRepo, FamiliaSucursalRepository familiaRepo, TamanoEnvaseSucursalRepository tamanoRepo, BasePinturaSucursalRepository baseRepo, ColorSucursalRepository colorRepo, TipoPinturaSucursalRepository tipoPinturaRepo) {
+    public ProductoSucursalService(ProductoDirector director, ProductoPinturaSucursalRepository pinturaRepo, ProductoOtroSucursalRepository otroRepo, ProductoPrecioStockService ppsService, ProductoGeneralService generalService, CategoriaSucursalRepository categoriaRepo, FamiliaSucursalRepository familiaRepo, TamanoEnvaseSucursalRepository tamanoRepo, ColorSucursalRepository colorRepo, TipoPinturaSucursalRepository tipoPinturaRepo) {
 
         this.director = director;
         this.pinturaRepo = pinturaRepo;
         this.otroRepo = otroRepo;
+        this.ppsService = ppsService;
+        this.generalService = generalService;
         this.categoriaRepo = categoriaRepo;
         this.familiaRepo = familiaRepo;
         this.tamanoRepo = tamanoRepo;
-        this.baseRepo = baseRepo;
         this.colorRepo = colorRepo;
         this.tipoPinturaRepo = tipoPinturaRepo;
     }
 
+    public List<ProductoSucursalViewDTO> listarProductosVisibles() {
 
+        List<ProductoSucursalViewDTO> resultado = new ArrayList<>();
+
+        // 1. Productos propios de sucursal
+        otroRepo.findAll().forEach(p ->
+                resultado.add(new ProductoSucursalViewDTO(
+                        p.getId(), p.getNombre(), p.getDescripcion(), p.getMarca(),
+                        (double) p.getPrecioFinal(), p.getStock(),
+                        "SUCURSAL"
+                ))
+        );
+
+        pinturaRepo.findAll().forEach(p ->
+                resultado.add(new ProductoSucursalViewDTO(
+                        p.getId(), p.getNombre(), p.getDescripcion(), p.getMarca(),
+                        (double) p.getPrecioFinal(), p.getStock(),
+                        "SUCURSAL"
+                ))
+        );
+
+        // 2. Overrides locales
+        Map<Long, ProductoPrecioStock> overrideMap =
+                ppsService.listar().stream().collect(Collectors.toMap(
+                        ProductoPrecioStock::getProductoId,
+                        o -> o
+                ));
+
+        // 3. Productos generales (vía GENERAL SERVICE)
+        generalService.listarOtros().forEach(g -> {
+            ProductoPrecioStock override = overrideMap.get(g.getId());
+
+            resultado.add(new ProductoSucursalViewDTO(
+                    g.getId(), g.getNombre(), g.getDescripcion(), g.getMarca(),
+                    override != null ? override.getPrecio() : (double) g.getPrecioFinal(),
+                    override != null ? override.getStock() : 0,
+                    override != null ? "GENERAL_OVERRIDE" : "GENERAL"
+            ));
+        });
+
+        generalService.listarPintura().forEach(g -> {
+            ProductoPrecioStock override = overrideMap.get(g.getId());
+
+            resultado.add(new ProductoSucursalViewDTO(
+                    g.getId(), g.getNombre(), g.getDescripcion(), g.getMarca(),
+                    override != null ? override.getPrecio() : (double) g.getPrecioFinal(),
+                    override != null ? override.getStock() : 0,
+                    override != null ? "GENERAL_OVERRIDE" : "GENERAL"
+            ));
+        });
+
+        return resultado;
+    }
     public Producto crear(ProductoDTO dto) {
 
         // 1. Resolver objetos segun ID
@@ -54,9 +112,6 @@ public class ProductoSucursalService {
         TamanoEnvaseSucursal tamano = tamanoRepo.findById(dto.getTamanoEnvId())
                 .orElseThrow(() -> new RuntimeException("Tamaño envase no encontrado"));
 
-        BasePinturaSucursal base = baseRepo.findById(dto.getBasePinturaId())
-                .orElseThrow(() -> new RuntimeException("Base pintura no encontrada"));
-
         ColorSucursal color = colorRepo.findById(dto.getColorId())
                 .orElseThrow(() -> new RuntimeException("Color no encontrado"));
 
@@ -68,7 +123,6 @@ public class ProductoSucursalService {
                 "categoria", categoria,
                 "familia", familia,
                 "tamano", tamano,
-                "base", base,
                 "color", color,
                 "tipoPintura", tipoPintura
         );

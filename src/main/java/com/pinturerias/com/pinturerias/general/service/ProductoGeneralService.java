@@ -16,18 +16,18 @@ import java.util.Map;
 
 public class ProductoGeneralService {
     private final ProductoDirector director;
+
     private final ProductoPinturaGeneralRepository pinturaRepo;
     private final ProductoOtroGeneralRepository otroRepo;
 
     private final CategoriaRepository categoriaRepo;
     private final FamiliaRepository familiaRepo;
     private final TamanoEnvaseRepository tamanoRepo;
-    private final BasePinturaRepository baseRepo;
 
     private final ColorRepository colorRepo;             // compartidos
     private final TipoPinturaRepository tipoPinturaRepo;
 
-    public ProductoGeneralService(ProductoDirector director, ProductoPinturaGeneralRepository pinturaRepo, ProductoOtroGeneralRepository otroRepo, CategoriaRepository categoriaRepo, FamiliaRepository familiaRepo, TamanoEnvaseRepository tamanoRepo, BasePinturaRepository baseRepo, ColorRepository colorRepo, TipoPinturaRepository tipoPinturaRepo) {
+    public ProductoGeneralService(ProductoDirector director, ProductoPinturaGeneralRepository pinturaRepo, ProductoOtroGeneralRepository otroRepo, CategoriaRepository categoriaRepo, FamiliaRepository familiaRepo, TamanoEnvaseRepository tamanoRepo, ColorRepository colorRepo, TipoPinturaRepository tipoPinturaRepo) {
 
         this.director = director;
         this.pinturaRepo = pinturaRepo;
@@ -35,7 +35,6 @@ public class ProductoGeneralService {
         this.categoriaRepo = categoriaRepo;
         this.familiaRepo = familiaRepo;
         this.tamanoRepo = tamanoRepo;
-        this.baseRepo = baseRepo;
         this.colorRepo = colorRepo;
         this.tipoPinturaRepo = tipoPinturaRepo;
     }
@@ -53,9 +52,6 @@ public class ProductoGeneralService {
         TamanoEnvaseGeneral tamano = tamanoRepo.findById(dto.getTamanoEnvId())
                 .orElseThrow(() -> new RuntimeException("Tamaño envase no encontrado"));
 
-        BasePinturaGeneral base = baseRepo.findById(dto.getBasePinturaId())
-                .orElseThrow(() -> new RuntimeException("Base pintura no encontrada"));
-
         ColorGeneral color = colorRepo.findById(dto.getColorId())
                 .orElseThrow(() -> new RuntimeException("Color no encontrado"));
 
@@ -67,7 +63,6 @@ public class ProductoGeneralService {
                 "categoria", categoria,
                 "familia", familia,
                 "tamano", tamano,
-                "base", base,
                 "color", color,
                 "tipoPintura", tipoPintura
         );
@@ -102,6 +97,20 @@ public class ProductoGeneralService {
         lista.addAll(pinturaRepo.findAll());
 
         return lista;
+    }
+    public List<ProductoPinturaGeneral> listarPintura() {
+        return pinturaRepo.findAll();
+    }
+
+    public List<ProductoOtroGeneral> listarOtros() {
+        return otroRepo.findAll();
+    }
+
+    public Producto obtenerPorId(Long id) {
+        return pinturaRepo.findById(id)
+                .map(p -> (Producto)p)
+                .or(() -> otroRepo.findById(id).map(p -> (Producto)p))
+                .orElseThrow(() -> new RuntimeException("Producto general no encontrado"));
     }
 
     public void eliminar(Long id, String tipo) {

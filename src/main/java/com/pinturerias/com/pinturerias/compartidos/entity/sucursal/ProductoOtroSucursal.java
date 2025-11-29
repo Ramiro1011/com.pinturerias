@@ -21,7 +21,7 @@ public class ProductoOtroSucursal extends Producto {
     public void setStock(int stock) {
         this.stock = stock;
     }
-
+    public int getStock(){return stock;}
     public void setFamilia(FamiliaSucursal familia) {this.familia = familia;}
     public void setCategoria(CategoriaSucursal categoria) {
         this.categoria = categoria;

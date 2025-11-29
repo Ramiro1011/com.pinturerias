@@ -3,6 +3,7 @@ package com.pinturerias.com.pinturerias.sucursal.controller;
 import com.pinturerias.com.pinturerias.compartidos.dto.ProductoDTO;
 import com.pinturerias.com.pinturerias.compartidos.entity.Producto;
 import com.pinturerias.com.pinturerias.compartidos.enumerate.ContextoProducto;
+import com.pinturerias.com.pinturerias.sucursal.dto.ProductoSucursalViewDTO;
 import com.pinturerias.com.pinturerias.sucursal.service.ProductoSucursalService;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +20,8 @@ public class ProductoSucursalController {
     }
 
     @GetMapping
-    public List<Producto> listar() {
-        return service.listar();
+    public List<ProductoSucursalViewDTO> listar() {
+        return service.listarProductosVisibles();
     }
 
     @PostMapping

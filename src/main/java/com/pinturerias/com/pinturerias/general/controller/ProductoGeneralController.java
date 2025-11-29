@@ -25,9 +25,7 @@ public class ProductoGeneralController {
     }
 
     @PostMapping
-    public Producto crear(
-            @RequestBody ProductoDTO dto
-    ) {
+    public Producto crear(@RequestBody ProductoDTO dto) {
         // el contexto SIEMPRE general para este controller
         dto.setContexto(ContextoProducto.GENERAL);
         return service.crear(dto);

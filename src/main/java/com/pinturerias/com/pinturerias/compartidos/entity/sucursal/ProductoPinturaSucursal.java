@@ -39,4 +39,5 @@ public class ProductoPinturaSucursal extends Producto {
     public void setCategoria(CategoriaSucursal categoria) {
         this.categoria = categoria;
     }
+    public int getStock(){return stock;}
 }
