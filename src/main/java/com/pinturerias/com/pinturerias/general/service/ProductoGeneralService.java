@@ -9,11 +9,13 @@ import com.pinturerias.com.pinturerias.general.entity.*;
 import com.pinturerias.com.pinturerias.general.repository.*;
 import com.pinturerias.com.pinturerias.sucursal.entity.*;
 import com.pinturerias.com.pinturerias.sucursal.repository.*;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class ProductoGeneralService {
     private final ProductoDirector director;
 

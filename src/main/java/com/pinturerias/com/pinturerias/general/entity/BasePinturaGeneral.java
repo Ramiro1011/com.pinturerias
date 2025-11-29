@@ -6,7 +6,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "base_pintura")
+@Table(name = "base_pintura_general")
 @Data
 public class BasePinturaGeneral extends BasePintura {
 }

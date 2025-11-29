@@ -8,5 +8,7 @@ import lombok.Data;
 @Table(name = "tipo_pintura")
 @Data
 public class TipoPinturaGeneral extends TipoPintura {
-
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "base_id")
+    protected BasePinturaGeneral base;
 }
