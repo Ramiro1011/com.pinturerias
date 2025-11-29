@@ -1,6 +1,5 @@
 package com.pinturerias.com.pinturerias.sucursal.entity;
 
-import com.pinturerias.com.pinturerias.compartidos.entity.BasePintura;
 import com.pinturerias.com.pinturerias.compartidos.entity.Categoria;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

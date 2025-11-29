@@ -61,10 +61,6 @@ public class ProductoOtroBuilder implements ProductoBuilderBase {
 
     }
 
-    @Override
-    public void setBasePintura(BasePintura basePintura) {
-
-    }
 
     @Override
     public void setTipoPintura(TipoPintura tipoPintura) {

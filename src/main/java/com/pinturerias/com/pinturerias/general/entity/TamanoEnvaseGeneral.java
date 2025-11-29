@@ -1,6 +1,5 @@
 package com.pinturerias.com.pinturerias.general.entity;
 
-import com.pinturerias.com.pinturerias.compartidos.entity.Categoria;
 import com.pinturerias.com.pinturerias.compartidos.entity.TamanoEnvase;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

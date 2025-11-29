@@ -1,11 +1,10 @@
 package com.pinturerias.com.pinturerias.compartidos.entity.sucursal;
 
 import com.pinturerias.com.pinturerias.compartidos.entity.Producto;
-import com.pinturerias.com.pinturerias.general.entity.CategoriaGeneral;
-import com.pinturerias.com.pinturerias.general.entity.FamiliaGeneral;
 import com.pinturerias.com.pinturerias.sucursal.entity.CategoriaSucursal;
 import com.pinturerias.com.pinturerias.sucursal.entity.FamiliaSucursal;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -14,7 +13,9 @@ import lombok.Data;
 @Data
 public class ProductoOtroSucursal extends Producto {
     private int stock;
+    @ManyToOne
     private FamiliaSucursal familia;
+    @ManyToOne
     private CategoriaSucursal categoria;
 
     public void setStock(int stock) {

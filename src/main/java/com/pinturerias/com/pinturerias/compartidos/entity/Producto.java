@@ -1,7 +1,6 @@
 package com.pinturerias.com.pinturerias.compartidos.entity;
 
-import com.pinturerias.com.pinturerias.general.entity.CategoriaGeneral;
-import com.pinturerias.com.pinturerias.general.entity.FamiliaGeneral;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;

@@ -5,8 +5,6 @@ import com.pinturerias.com.pinturerias.compartidos.dto.ProductoDTO;
 import com.pinturerias.com.pinturerias.compartidos.entity.Producto;
 import com.pinturerias.com.pinturerias.compartidos.entity.general.ProductoOtroGeneral;
 import com.pinturerias.com.pinturerias.compartidos.entity.general.ProductoPinturaGeneral;
-import com.pinturerias.com.pinturerias.compartidos.entity.sucursal.ProductoOtroSucursal;
-import com.pinturerias.com.pinturerias.compartidos.entity.sucursal.ProductoPinturaSucursal;
 import com.pinturerias.com.pinturerias.general.entity.*;
 import com.pinturerias.com.pinturerias.general.repository.*;
 import com.pinturerias.com.pinturerias.sucursal.entity.*;

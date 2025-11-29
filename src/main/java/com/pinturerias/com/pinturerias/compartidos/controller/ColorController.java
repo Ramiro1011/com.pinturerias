@@ -1,6 +1,5 @@
 package com.pinturerias.com.pinturerias.compartidos.controller;
 
-import com.pinturerias.com.pinturerias.compartidos.service.BaseService;
 import com.pinturerias.com.pinturerias.compartidos.service.ColorService;
 import org.springframework.web.bind.annotation.*;
 

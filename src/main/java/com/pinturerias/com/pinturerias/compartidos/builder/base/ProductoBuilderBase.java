@@ -14,7 +14,6 @@ public interface ProductoBuilderBase {
     void setCategoria(Categoria categoria);
     void setFamilia(Familia familia);
     void setTamanoEnvase(TamanoEnvase tamanoEnvase);
-    void setBasePintura(BasePintura basePintura);
     void setTipoPintura(TipoPintura tipoPintura);
     void setColor(ColorBase color);
 

@@ -61,10 +61,6 @@ public class ProductoPinturaBuilder implements ProductoBuilderBase {
         producto.setTamEnv((TamanoEnvaseGeneral) tamanoEnvase);
     }
 
-    @Override
-    public void setBasePintura(BasePintura basePintura) {
-        producto.setBase((BasePinturaGeneral) basePintura);
-    }
 
     @Override
     public void setTipoPintura(TipoPintura tipoPintura) {

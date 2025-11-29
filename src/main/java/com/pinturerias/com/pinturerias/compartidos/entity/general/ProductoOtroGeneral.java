@@ -4,6 +4,7 @@ import com.pinturerias.com.pinturerias.compartidos.entity.Producto;
 import com.pinturerias.com.pinturerias.general.entity.CategoriaGeneral;
 import com.pinturerias.com.pinturerias.general.entity.FamiliaGeneral;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -11,7 +12,9 @@ import lombok.Data;
 @Table(name = "producto_otro")
 @Data
 public class ProductoOtroGeneral extends Producto {
+    @ManyToOne
     private FamiliaGeneral familia;
+    @ManyToOne
     private CategoriaGeneral categoria;
 
     public void setFamilia(FamiliaGeneral familia) {this.familia = familia;}

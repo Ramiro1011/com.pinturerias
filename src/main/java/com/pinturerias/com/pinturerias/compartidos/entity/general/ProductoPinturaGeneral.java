@@ -3,6 +3,7 @@ package com.pinturerias.com.pinturerias.compartidos.entity.general;
 import com.pinturerias.com.pinturerias.general.entity.*;
 import com.pinturerias.com.pinturerias.compartidos.entity.Producto;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -10,12 +11,16 @@ import lombok.Data;
 @Table(name = "producto_pintura")
 @Data
 public class ProductoPinturaGeneral extends Producto {
+    @ManyToOne
     private FamiliaGeneral familia;
+    @ManyToOne
     private CategoriaGeneral categoria;
+    @ManyToOne
     private TipoPinturaGeneral tipoPinturaGeneral;
+    @ManyToOne
     private ColorGeneral colorGeneral;
+    @ManyToOne
     private TamanoEnvaseGeneral tamEnv;
-    private BasePinturaGeneral base;
 
     public void setTipoPintura(TipoPinturaGeneral tipo) {
         this.tipoPinturaGeneral = tipo;
@@ -30,5 +35,4 @@ public class ProductoPinturaGeneral extends Producto {
     public void setCategoria(CategoriaGeneral categoria) {
         this.categoria = categoria;
     }
-    public void setBase(BasePinturaGeneral base) {this.base = base;}
 }

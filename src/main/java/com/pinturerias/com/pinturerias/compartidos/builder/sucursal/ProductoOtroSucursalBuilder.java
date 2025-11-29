@@ -2,8 +2,6 @@ package com.pinturerias.com.pinturerias.compartidos.builder.sucursal;
 
 import com.pinturerias.com.pinturerias.compartidos.builder.base.ProductoBuilderBase;
 import com.pinturerias.com.pinturerias.compartidos.entity.*;
-import com.pinturerias.com.pinturerias.general.entity.CategoriaGeneral;
-import com.pinturerias.com.pinturerias.general.entity.FamiliaGeneral;
 import com.pinturerias.com.pinturerias.compartidos.entity.sucursal.ProductoOtroSucursal;
 import com.pinturerias.com.pinturerias.sucursal.entity.CategoriaSucursal;
 import com.pinturerias.com.pinturerias.sucursal.entity.FamiliaSucursal;
@@ -63,10 +61,6 @@ public class ProductoOtroSucursalBuilder implements ProductoBuilderBase {
 
     }
 
-    @Override
-    public void setBasePintura(BasePintura basePintura) {
-
-    }
 
     @Override
     public void setTipoPintura(TipoPintura tipoPintura) {

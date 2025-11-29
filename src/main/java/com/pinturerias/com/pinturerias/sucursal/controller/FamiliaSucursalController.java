@@ -1,8 +1,6 @@
 package com.pinturerias.com.pinturerias.sucursal.controller;
 
 import com.pinturerias.com.pinturerias.compartidos.controller.BaseController;
-import com.pinturerias.com.pinturerias.general.entity.FamiliaGeneral;
-import com.pinturerias.com.pinturerias.general.service.FamiliaGeneralService;
 import com.pinturerias.com.pinturerias.sucursal.entity.FamiliaSucursal;
 import com.pinturerias.com.pinturerias.sucursal.service.FamiliaSucursalService;
 import org.springframework.web.bind.annotation.RequestMapping;

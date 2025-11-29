@@ -1,6 +1,5 @@
 package com.pinturerias.com.pinturerias.config;
 
-import com.pinturerias.com.pinturerias.config.TenantContext;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Component;

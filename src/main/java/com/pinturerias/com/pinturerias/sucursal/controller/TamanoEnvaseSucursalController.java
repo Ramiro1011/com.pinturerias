@@ -1,8 +1,6 @@
 package com.pinturerias.com.pinturerias.sucursal.controller;
 
 import com.pinturerias.com.pinturerias.compartidos.controller.BaseController;
-import com.pinturerias.com.pinturerias.general.entity.TamanoEnvaseGeneral;
-import com.pinturerias.com.pinturerias.general.service.TamanoEnvaseGeneralService;
 import com.pinturerias.com.pinturerias.sucursal.entity.TamanoEnvaseSucursal;
 import com.pinturerias.com.pinturerias.sucursal.service.TamanoEnvaseSucursalService;
 import org.springframework.web.bind.annotation.RequestMapping;

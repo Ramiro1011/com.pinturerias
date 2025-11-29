@@ -4,7 +4,6 @@ import com.pinturerias.com.pinturerias.compartidos.dto.ProductoDTO;
 import com.pinturerias.com.pinturerias.compartidos.entity.Producto;
 import com.pinturerias.com.pinturerias.compartidos.enumerate.ContextoProducto;
 import com.pinturerias.com.pinturerias.general.service.ProductoGeneralService;
-import com.pinturerias.com.pinturerias.sucursal.service.ProductoSucursalService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

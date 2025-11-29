@@ -1,9 +1,6 @@
 package com.pinturerias.com.pinturerias.compartidos.director;
 
 import com.pinturerias.com.pinturerias.compartidos.builder.base.ProductoBuilderBase;
-import com.pinturerias.com.pinturerias.compartidos.builder.general.ProductoPinturaBuilder;
-import com.pinturerias.com.pinturerias.compartidos.builder.sucursal.ProductoOtroSucursalBuilder;
-import com.pinturerias.com.pinturerias.compartidos.builder.sucursal.ProductoPinturaSucursalBuilder;
 import com.pinturerias.com.pinturerias.compartidos.dto.ProductoDTO;
 import com.pinturerias.com.pinturerias.compartidos.entity.*;
 import org.springframework.stereotype.Component;
@@ -54,7 +51,6 @@ public class ProductoDirector {
         builder.setCategoria((Categoria) objetosResueltos.get("categoria"));
         builder.setFamilia((Familia) objetosResueltos.get("familia"));
         builder.setTamanoEnvase((TamanoEnvase) objetosResueltos.get("tamano"));
-        builder.setBasePintura((BasePintura) objetosResueltos.get("base"));
         builder.setTipoPintura((TipoPintura) objetosResueltos.get("tipoPintura"));
         builder.setColor((ColorBase) objetosResueltos.get("color"));
 
